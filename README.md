@@ -3,4 +3,5 @@
 School project MobTS 2021
 Android app
 
-<Input informational shait here>
+"Input informational shait here"
+
