@@ -1,3 +1,6 @@
-# Project_1602_2021 Android app
+# Android_Project_160221 
 
-Input good shait here
+School project MobTS 2021
+Android app
+
+<Input informational shait here>
