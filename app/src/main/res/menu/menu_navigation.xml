@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:title="Koti"
+        android:icon="@drawable/ic_home"/>
+    <item
+        android:id="@+id/summary"
+        android:title="Yhteenveto"
+        android:icon="@drawable/ic_summary"/>
+    <item
+        android:id="@+id/history"
+        android:title="Historia"
+        android:icon="@drawable/ic_history"/>
+
+
+</menu>
