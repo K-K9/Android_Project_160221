@@ -74,19 +74,15 @@ public class MainActivity extends AppCompatActivity {
             String aika = currentTime;
 
             // validoidaan edittext kentät (paino vapaaehtoinen)
-            if (ylapaine.isEmpty() && alapaine.isEmpty() && syke.isEmpty()) {
-                Toast.makeText(MainActivity.this, "Syötäthän ylapaineen, alapaineen ja sykkeen", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            else if (Integer.parseInt(ylapaine) > 300){
+            if (ylapaine.isEmpty() || Integer.parseInt(ylapaine) > 300){
                 Toast.makeText(MainActivity.this, "Tarkista yläpaine kenttä", Toast.LENGTH_SHORT).show();
                 return;
             }
-            else if (Integer.parseInt(alapaine) > 300){
+            else if (alapaine.isEmpty() || Integer.parseInt(alapaine) > 300){
                 Toast.makeText(MainActivity.this, "Tarkista alapaine kenttä", Toast.LENGTH_SHORT).show();
                 return;
             }
-            else if (Integer.parseInt(syke) > 300){
+            else if (syke.isEmpty() || Integer.parseInt(syke) > 300){
                 Toast.makeText(MainActivity.this, "Tarkista syke kenttä", Toast.LENGTH_SHORT).show();
                 return;
             }
