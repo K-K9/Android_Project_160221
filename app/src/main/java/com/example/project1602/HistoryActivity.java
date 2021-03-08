@@ -2,34 +2,44 @@ package com.example.project1602;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.drawable.shapes.Shape;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 
 
 public class HistoryActivity extends AppCompatActivity {
-
-
+    MeasurementReadings db;
+    ArrayList<String> alapaine_id, ylapaine_id, syke_id, paino_id, aika_id;
+    CustomAdapter customAdapter;
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        //Initialize and assign variables
+        //Alusta ja aseta muuttujat
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        //Set Home Selected
+        //Historia näkymänä
         bottomNavigationView.setSelectedItemId(R.id.history);
 
 
-        //Perform ItemSelectedListener
+        //Siirtymiset toisiin näkymiin
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.summary:
@@ -47,47 +57,37 @@ public class HistoryActivity extends AppCompatActivity {
             }
             return false;
         });
+        recyclerView = findViewById(R.id.recyclerView);
+        db = new MeasurementReadings(HistoryActivity.this);
+        alapaine_id = new ArrayList<>();
+        ylapaine_id = new ArrayList<>();
+        syke_id = new ArrayList<>();
+        paino_id = new ArrayList<>();
+        aika_id = new ArrayList<>();
 
+        storeDataInArrays();
+        customAdapter = new CustomAdapter(HistoryActivity.this, ylapaine_id, alapaine_id, syke_id, paino_id, aika_id);
+        recyclerView.setAdapter(customAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(HistoryActivity.this));
+        }
+        void storeDataInArrays(){
+        Cursor cursor = db.viewData();
+        if(cursor.getCount() == 0){
+            Toast.makeText(this, "Ei merkintöjä", Toast.LENGTH_SHORT).show();
+        }else{
+            while(cursor.moveToNext()){
+                ylapaine_id.add(cursor.getString(1));
+                alapaine_id.add(cursor.getString(2));
+                syke_id.add(cursor.getString(3));
+                paino_id.add(cursor.getString(4));
+                aika_id.add(cursor.getString(6));
 
-        //kutsu filtteröintiin
-        initSearchWidgets();
+            }
+        }
 
     }
 
 
-    //listview tarvitsee ehkä muokkausta bottomnavin ja haku kentän suhteen?? kunhan saadaan testattua.
-    //filtteröinti käyttäjän kirjoituksen mukaan, muokkausta sen mukaan mistä haetaan tallennettu tieto.
-    private void initSearchWidgets()
-    {
-        SearchView searchView = (SearchView) findViewById(R.id.ListSearchViewMeasurement);
-
-       searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-           @Override
-           public boolean onQueryTextSubmit(String query) {
-               return false;
-           }
-
-
-           //filtteriöinti kun käyttäjä kirjoittaa tekstikenttään
-           @Override
-           public boolean onQueryTextChange(String newText) {
-
-               //muokkausta tähän pätkään, haetaan tallennetut tulokset muistista ja filtteröidään päivämäärän mukaan?
-               /*ArrayList<Shape> filteredShapes = new ArrayList<Shape>();
-               for(shape shape: shapeList){
-                   if(shape.getDate().toLowerCase().contains(s.toLowerCaser())){
-                       filteredShape.add(shape);
-                   }
-
-               }
-                ShapeAdapter adapter = new ShapeAdapter(getApplicationContext(), 0, filteredShapes);
-               listview.setAdapter(adapter);*/
-
-
-               return false;
-           }
-       });
-    }
 
 
 
