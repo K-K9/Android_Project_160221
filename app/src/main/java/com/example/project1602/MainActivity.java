@@ -91,8 +91,10 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             else if (!paino.isEmpty()){
-                Toast.makeText(MainActivity.this, "Tarkista paino kenttä", Toast.LENGTH_SHORT).show();
-                return;
+                if(Integer.parseInt(paino) > 300) {
+                    Toast.makeText(MainActivity.this, "Tarkista paino kenttä", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
 
             //luodaan uusi metodi jolle syötetään arvot
