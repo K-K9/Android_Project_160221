@@ -8,47 +8,44 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class MeasurementReadings extends SQLiteOpenHelper {
 
-    // creating a constant variables for our database.
-    // below variable is for our database name.
+    //constant muuttujat tietokannalle
+    // nimi tietokannalle
     private static final String DB_NAME = "bloodpressure.db";
 
-    // below int is our database version
+    // tietokannan versio
     private static final int DB_VERSION = 1;
 
-    // below variable is for our table name.
+    // muuttuja taulun nimelle
     private static final String TABLE_NAME = "merkinnat";
 
-    // below variable is for our id column.
+    // uniikki id
     private static final String ID_COL = "id";
 
-    // below variable is for our course name column
+
     private static final String YLAPAINE_COL = "ylapaine";
 
-    // below variable id for our course duration column.
+
     private static final String ALAPAINE_COL = "alapaine";
 
-    // below variable for our course description column.
+
     private static final String SYKE_COL = "syke";
 
-    // below variable is for our course tracks column.
+
     private static final String PAINO_COL = "paino";
 
     private static final String NOTES_COL = "merkinnat";
 
     private static final String AIKA_COL = "aika";
 
-    // creating a constructor for our database handler.
+    // luodaan konstruktori tietokannan käsittelijälle
     public MeasurementReadings(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
-    // below method is for creating a database by running a sqlite query
+    //sqlite query jolla luodaan database
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // on below line we are creating
-        // an sqlite query and we are
-        // setting our column names
-        // along with their data types.
+        // nimetään sqlite tietokantaan muuttujat
         String query = "CREATE TABLE " + TABLE_NAME + " ("
                 + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + YLAPAINE_COL + " TEXT,"
@@ -58,38 +55,32 @@ public class MeasurementReadings extends SQLiteOpenHelper {
                 + NOTES_COL + " TEXT,"
                 + AIKA_COL + " TEXT)";
 
-        // at last we are calling a exec sql
-        // method to execute above sql query
+        // suoritetaan query
         db.execSQL(query);
     }
 
-    // this method is use to add new course to our sqlite database.
-    public void addNewNote(String ylapaine, String alapaine, String syke, String paino, String merkinnat, String aika) {
+    // luodaan uusi merkintä tietokantaan
+    public void addNewNote(String ylapaine, String alapaine, String syke, String paino, String aika) {
 
-        // on below line we are creating a variable for
-        // our sqlite database and calling writable method
-        // as we are writing data in our database.
+        // luodaan muuttuja SQLitelle
+        //tehdään siitä Writeable jotta voidaan
+        // kirjoittaa tietokantaan
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // on below line we are creating a
-        // variable for content values.
+        // luodaan ContentValues muuttuja
         ContentValues values = new ContentValues();
 
-        // on below line we are passing all values
-        // along with its key and value pair.
+        // siirretään key-value arvot
         values.put(YLAPAINE_COL, ylapaine);
         values.put(ALAPAINE_COL, alapaine);
         values.put(SYKE_COL, syke);
         values.put(PAINO_COL, paino);
-        values.put(NOTES_COL, merkinnat);
         values.put(AIKA_COL, aika);
 
-        // after adding all values we are passing
-        // content values to our table.
+        // siirretään contentvalues arvo
         db.insert(TABLE_NAME, null, values);
 
-        // at last we are closing our
-        // database after adding database.
+        // suljetaan database
         db.close();
     }
     public Cursor viewData(){
@@ -101,7 +92,7 @@ public class MeasurementReadings extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // this method is called to check if the table exists already.
+        // tarkistetaan onko database jo olemassa
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 
         onCreate(db);

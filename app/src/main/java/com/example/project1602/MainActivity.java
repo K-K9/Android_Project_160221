@@ -8,22 +8,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
-    Button moveBtn;
+    private EditText ylapaineDb, alapaineDb, sykeDb, painoDb, merkinnatDb;
+    private Button addBtn;
+    private MeasurementReadings dbHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        moveBtn = findViewById(R.id.siirryBtn);
-
-        moveBtn.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext()
-                    ,MittausTulokset.class));
-            overridePendingTransition(0,0);
-        });
         //Initialize and assign variables
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -34,11 +36,6 @@ public class MainActivity extends AppCompatActivity {
         //Perform ItemSelectedListneer
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()){
-                case R.id.summary:
-                    startActivity(new Intent(getApplicationContext()
-                    ,SummaryActivity.class));
-                    overridePendingTransition(0,0);
-                    return true;
                 case R.id.home:
                     return true;
                 case R.id.history:
@@ -48,6 +45,50 @@ public class MainActivity extends AppCompatActivity {
                     return true;
             }
             return false;
+        });
+        //alustetaan muuttujat
+        ylapaineDb = findViewById(R.id.editTextNumberVerenYlaPaine);
+        alapaineDb = findViewById(R.id.editTextNumberVerenAliPaine);
+        sykeDb = findViewById(R.id.editTextNumberSyke);
+        painoDb = findViewById(R.id.editTextNumberPaino);
+        addBtn = findViewById(R.id.buttonTallenna);
+
+
+        TextView AikaTextView = findViewById(R.id.textViewAika);
+        //hakee päivämäärän ja ajan kalenterista,   "pattern" miten halutaan ajan tulevan näkyvin
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy     HH:mm", Locale.getDefault());
+        String currentTime = sdf.format(new Date());
+        AikaTextView.setText(currentTime);
+
+        // luodaan uusi measurementreadings luokka
+        //
+        dbHandler = new MeasurementReadings(MainActivity.this);
+        // luodaan click listener napille
+        addBtn.setOnClickListener(v -> {
+
+            // haetaan data edittext kentistä
+            String ylapaine = ylapaineDb.getText().toString();
+            String alapaine = alapaineDb.getText().toString();
+            String syke = sykeDb.getText().toString();
+            String paino = painoDb.getText().toString();
+            String aika = currentTime;
+
+            // validoidaan edittext kentät (paino vapaaehtoinen)
+            if (ylapaine.isEmpty() && alapaine.isEmpty() && syke.isEmpty()) {
+                Toast.makeText(MainActivity.this, "Syötäthän ylapaineen, alapaineen ja sykkeen", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            //luodaan uusi metodi jolle syötetään arvot
+            dbHandler.addNewNote(ylapaine, alapaine, syke, paino, aika);
+
+            // näyttään toast viesti käyttäjälle
+            Toast.makeText(MainActivity.this, "Uusi merkintä lisätty", Toast.LENGTH_SHORT).show();
+            ylapaineDb.setText("");
+            alapaineDb.setText("");
+            sykeDb.setText("");
+            painoDb.setText("");
+
         });
     }
 }

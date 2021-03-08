@@ -3,16 +3,12 @@
 
     <item
         android:id="@+id/home"
-        android:title="Koti"
+        android:title="Uusi merkintä"
         android:icon="@drawable/ic_home"/>
     <item
-        android:id="@+id/summary"
-        android:title="Yhteenveto"
-        android:icon="@drawable/ic_summary"/>
-    <item
         android:id="@+id/history"
-        android:title="Historia"
-        android:icon="@drawable/ic_history"/>
+        android:title="Merkinnät"
+        android:icon="@drawable/ic_summary"/>
 
 
 </menu>

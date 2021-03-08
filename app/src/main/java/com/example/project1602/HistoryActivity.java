@@ -42,11 +42,6 @@ public class HistoryActivity extends AppCompatActivity {
         //Siirtymiset toisiin näkymiin
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()){
-                case R.id.summary:
-                    startActivity(new Intent(getApplicationContext()
-                            ,SummaryActivity.class));
-                    overridePendingTransition(0,0);
-                    return true;
                 case R.id.home:
                     startActivity(new Intent(getApplicationContext()
                             ,MainActivity.class));
