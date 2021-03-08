@@ -78,6 +78,22 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Syötäthän ylapaineen, alapaineen ja sykkeen", Toast.LENGTH_SHORT).show();
                 return;
             }
+            else if (Integer.parseInt(ylapaine) > 300){
+                Toast.makeText(MainActivity.this, "Tarkista yläpaine kenttä", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            else if (Integer.parseInt(alapaine) > 300){
+                Toast.makeText(MainActivity.this, "Tarkista alapaine kenttä", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            else if (Integer.parseInt(syke) > 300){
+                Toast.makeText(MainActivity.this, "Tarkista syke kenttä", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            else if (!paino.isEmpty()){
+                Toast.makeText(MainActivity.this, "Tarkista paino kenttä", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             //luodaan uusi metodi jolle syötetään arvot
             dbHandler.addNewNote(ylapaine, alapaine, syke, paino, aika);
