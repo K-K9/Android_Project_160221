@@ -26,7 +26,8 @@
         app:layout_constraintHorizontal_bias="0.82"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.167" />
+        app:layout_constraintVertical_bias="0.167"
+        android:maxLength="3"/>
 
     <TextView
         android:id="@+id/textViewPaino"
@@ -51,7 +52,8 @@
         app:layout_constraintHorizontal_bias="0.825"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.428" />
+        app:layout_constraintVertical_bias="0.428"
+        android:maxLength="3"/>
 
     <TextView
         android:id="@+id/textViewSyke"
@@ -76,7 +78,8 @@
         app:layout_constraintHorizontal_bias="0.825"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.561" />
+        app:layout_constraintVertical_bias="0.561"
+        android:maxLength="3"/>
 
     <TextView
         android:id="@+id/textViewVerenAlipaine"
@@ -88,7 +91,8 @@
         app:layout_constraintHorizontal_bias="0.367"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.307" />
+        app:layout_constraintVertical_bias="0.307"
+        />
 
     <EditText
         android:id="@+id/editTextNumberVerenAliPaine"
@@ -101,7 +105,8 @@
         app:layout_constraintHorizontal_bias="0.825"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.301" />
+        app:layout_constraintVertical_bias="0.301"
+        android:maxLength="3"/>
 
     <TextView
         android:id="@+id/textViewVerenYlapaine"
