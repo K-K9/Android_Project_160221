@@ -1,5 +1,9 @@
 package com.example.project1602;
-
+/**
+* Tämän luokan avulla Merkinnät-tabissa saadaan näytettyä SQLite-tietokannasta tuotu data ja luotua siitä dynaaminen lista
+* @author Samu Luoma
+* apuna käytetty https://www.youtube.com/watch?v=VQKq9RHMS_0
+*/
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
