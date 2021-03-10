@@ -1,5 +1,8 @@
 package com.example.project1602;
-
+/**
+* @author Samu Luoma, Miiro Silander, Kim Kari
+* apuna käytetty https://www.geeksforgeeks.org/how-to-create-and-add-data-to-sqlite-database-in-android/
+*/
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
