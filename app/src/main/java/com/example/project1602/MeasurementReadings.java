@@ -62,7 +62,16 @@ public class MeasurementReadings extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-    // luodaan uusi merkintä tietokantaan
+
+
+    /**
+     * luodaan uusi merkintä tietokantaan
+     * @param ylapaine
+     * @param alapaine
+     * @param syke
+     * @param paino
+     * @param aika
+     */
     public void addNewNote(String ylapaine, String alapaine, String syke, String paino, String aika) {
 
         // luodaan muuttuja SQLitelle
@@ -86,6 +95,11 @@ public class MeasurementReadings extends SQLiteOpenHelper {
         // suljetaan database
         db.close();
     }
+
+    /**
+     * Haetaan dataa tietokannasta
+     * @return
+     */
     public Cursor viewData(){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = " SELECT * FROM "+TABLE_NAME;
