@@ -1,5 +1,9 @@
 package com.example.project1602;
-
+/**
+* CustomAdapter luokka 
+* @author Samu Luoma
+* apuna käytetty https://www.youtube.com/watch?v=VQKq9RHMS_0
+*/
 import android.content.Context;
 import android.text.Layout;
 import android.view.LayoutInflater;
