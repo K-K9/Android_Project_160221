@@ -1,5 +1,8 @@
 package com.example.project1602;
-
+/**
+* @author Samu Luoma, Miiro Silander
+* apuna käytetty https://www.geeksforgeeks.org/how-to-create-and-add-data-to-sqlite-database-in-android/
+*/
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
